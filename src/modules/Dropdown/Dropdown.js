@@ -494,8 +494,6 @@ class DropdownInner extends Component {
       this.handleChange(e, newValue)
     }
 
-    this.clearSearchQuery()
-
     if (search) {
       _.invoke(this.searchRef.current, 'focus')
     } else {
