@@ -451,6 +451,10 @@ var DropdownInner = /*#__PURE__*/function (_Component) {
         _this.handleChange(e, newValue);
       }
 
+      if (_this.props.clearSearchQueryAfterItemAdd) {
+        _this.clearSearchQuery();
+      }
+
       if (search) {
         (0, _invoke2.default)(_this.searchRef.current, 'focus');
       } else {
