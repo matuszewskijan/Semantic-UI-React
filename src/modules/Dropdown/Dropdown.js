@@ -494,7 +494,9 @@ class DropdownInner extends Component {
       this.handleChange(e, newValue)
     }
 
-    this.clearSearchQuery()
+    if (this.props.clearSearchQueryAfterItemAdd) {
+      this.clearSearchQuery()
+    }
 
     if (search) {
       _.invoke(this.searchRef.current, 'focus')
@@ -508,6 +510,22 @@ class DropdownInner extends Component {
     // Notify the onAddItem prop if this is a new value
     if (isAdditionItem) {
       _.invoke(this.props, 'onAddItem', e, { ...this.props, value })
+    }
+
+    const options = getMenuOptions({
+      value: newValue,
+      options: this.props.options,
+      searchQuery: this.state.searchQuery,
+      additionLabel: this.props.additionLabel,
+      additionPosition: this.props.additionPosition,
+      allowAdditions: this.props.allowAdditions,
+      deburr: this.props.deburr,
+      multiple: this.props.multiple,
+      search: this.props.search,
+    })
+
+    if (_.isEmpty(options)) {
+      this.clearSearchQuery()
     }
   }
 
